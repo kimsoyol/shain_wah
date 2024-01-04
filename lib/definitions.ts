@@ -1,3 +1,4 @@
+import { DateTime } from "next-auth/providers/kakao";
 
 
 export type User = {
@@ -13,6 +14,6 @@ export type PoemFormProps = {
   body: string;
   author: string;
   imageUrl?: string;
-  postAt: string;
+  createdAt: DateTime;
   relatedBook?: string;
 }

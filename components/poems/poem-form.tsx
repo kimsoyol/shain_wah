@@ -18,22 +18,35 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { poemFormSchema } from "@/lib/valitators";
 import { poemDefaultValues } from "@/constants";
+import { createPoem } from "@/lib/actions/poem.actions";
 
 // { type }: { type: "Create" | "Update" }
 
 const PoemForm = () => {
   const type = 'Create'
   const initialValues = poemDefaultValues;
+  const initialState = { message: null, errors: {} }; 
 
   const form = useForm<z.infer<typeof poemFormSchema>>({
     resolver: zodResolver(poemFormSchema),
     defaultValues: initialValues,
   });
 
-  function onSubmit(values: z.infer<typeof poemFormSchema>) {
+  async function onSubmit(values: z.infer<typeof poemFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log('clickz');
+
+    try {
+      await createPoem({
+        title: values.title,
+        author: values.author,
+        body: values.body,
+        
+      })
+    } catch (error) {
+      
+    }
 
     toast("A new poem created!");
 

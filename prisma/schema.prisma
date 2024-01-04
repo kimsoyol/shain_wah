@@ -10,19 +10,94 @@ datasource db {
 
 }
 
-
 model User {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email String @unique
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String @unique
   password String
-  name String
-  articles Article[]
+  name     String
+
+}
+model Author {
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  Poems     Poem[]
+  Books     Book[]
+  Paintings Painting[]
+  Blogs     Blog[]
+  Castings  Casting[]
+}
+model Poem {
+ id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+ title  String? 
+ body   String
+ author Author @relation(fields: [authorId], references: [id])
+ authorId String @db.Uuid
+ Books  BookPoem[]
+ Paintings PoemPainting[]
+ createdAt DateTime
 }
 
-model Article {
-  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title    String
-  body     String?
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String @db.Uuid
+model Book {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  author      Author @relation(fields: [authorId], references: [id])
+  authorId    String @db.Uuid
+  Poems       BookPoem[]
+  Paintings   BookPainting[]
+  publishedOn Int
+}
+
+model Painting {
+ id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+ title    String?
+ author   Author @relation(fields: [authorId], references: [id])
+ authorId String @db.Uuid
+ Books    BookPainting[]
+ Poems    PoemPainting[]
+ createdAt Int 
+}
+
+
+model Blog {
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title     String
+  body      String
+  author    Author @relation(fields: [authorId], references: [id])
+  authorId  String @db.Uuid
+  createdAt DateTime
+}
+
+model Casting {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  youtubeLink String @map("youtube_link")
+  uploadDate  DateTime @map("upload_date")
+  body        String
+  author      Author @relation(fields: [authorId], references: [id])
+  authorId    String @db.Uuid
+  createdAt   Int
+}
+
+model BookPoem {
+  bookId String @db.Uuid
+  poemId String @db.Uuid
+  Book   Book  @relation(fields: [bookId], references: [id])
+  Poem   Poem  @relation(fields: [poemId], references: [id])
+  @@id([bookId, poemId])
+}
+
+model BookPainting {
+  bookId     String @db.Uuid
+  paintingId String @db.Uuid
+  Book       Book     @relation(fields: [bookId], references: [id])
+  Painting   Painting @relation(fields: [paintingId], references: [id])
+  @@id([bookId, paintingId])
+}
+
+model PoemPainting {
+  poemId      String @db.Uuid
+  paintingId  String @db.Uuid
+  Poem        Poem @relation(fields: [poemId], references: [id])
+  Painting    Painting @relation(fields: [paintingId], references: [id])
+  @@id([poemId, paintingId])
 }
