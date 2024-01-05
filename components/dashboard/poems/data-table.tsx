@@ -88,6 +88,7 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Button variant="outline">Create Poem</Button>
       </div>
       {/* Table */}
       <div className="rounded-md border">

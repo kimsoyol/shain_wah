@@ -25,7 +25,6 @@ import { createPoem } from "@/lib/actions/poem.actions";
 const PoemForm = () => {
   const type = "Create";
   const initialValues = poemDefaultValues;
-  const initialState = { message: null, errors: {} };
 
   const form = useForm<z.infer<typeof poemFormSchema>>({
     resolver: zodResolver(poemFormSchema),

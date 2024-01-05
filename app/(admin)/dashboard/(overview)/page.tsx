@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
+import ImageUp from "@/components/ui/img-up"
 
 const page = () => {
-  return (
-    <main>
-      <h1>dahboard</h1>
-      
 
-    </main>
-  );
-};
-export default page;
+  return (
+    <div>page
+
+      <ImageUp />
+
+    </div>
+  )
+}
+export default page
