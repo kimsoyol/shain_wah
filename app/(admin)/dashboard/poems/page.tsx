@@ -14,8 +14,6 @@ const Page = async ({
   const query = searchParams?.query || ''
   const currentPage = searchParams?.page || 1;
   const totalPages = await fetchPoemsPages(query);
-
-  console.log(totalPages);
   
 
   return (
