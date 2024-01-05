@@ -17,6 +17,8 @@ async function testDatabaseConnection() {
   }
  }
 
+
+
 export async function createPoem(poemData: any) {
   const authorRecord = await prisma.author.findFirst({
     where: {
@@ -29,8 +31,6 @@ export async function createPoem(poemData: any) {
   }
 
   try {
-    console.log(poemData.author);
-    console.log(authorRecord.id);
     testDatabaseConnection();
     await prisma.poem.create({
       data: {

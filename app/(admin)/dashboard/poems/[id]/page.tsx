@@ -1,4 +1,4 @@
-import PoemsForm from "@/components/poems/poem-form";
+import PoemsForm from "@/components/dashboard/poems/poem-form";
 
 const page = () => {
   return (

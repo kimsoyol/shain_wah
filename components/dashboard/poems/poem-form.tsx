@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "../../ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,9 +23,9 @@ import { createPoem } from "@/lib/actions/poem.actions";
 // { type }: { type: "Create" | "Update" }
 
 const PoemForm = () => {
-  const type = 'Create'
+  const type = "Create";
   const initialValues = poemDefaultValues;
-  const initialState = { message: null, errors: {} }; 
+  const initialState = { message: null, errors: {} };
 
   const form = useForm<z.infer<typeof poemFormSchema>>({
     resolver: zodResolver(poemFormSchema),
@@ -35,24 +35,20 @@ const PoemForm = () => {
   async function onSubmit(values: z.infer<typeof poemFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log('clickz');
+    console.log("clickz");
 
     try {
       await createPoem({
         title: values.title,
         author: values.author,
         body: values.body,
-        
-      })
-    } catch (error) {
-      
-    }
+      });
+    } catch (error) {}
 
     toast("A new poem created!");
 
     console.log(values);
   }
-
 
   return (
     <Form {...form}>

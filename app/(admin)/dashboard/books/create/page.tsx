@@ -1,4 +1,4 @@
-import { BookForm } from "@/components/books/book-form"
+import { BookForm } from "@/components/dashboard/books/book-form"
 
 
 const page = () => {
