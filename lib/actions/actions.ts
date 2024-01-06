@@ -4,15 +4,13 @@ import { writeFile } from "fs/promises";
 import path from "path";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-import { createWriteStream } from "fs";
+import { revalidatePath } from "next/cache";
+import moment from 'moment'
+
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 // ...
-export type State = {
-  errors?: {
-    img?: string[];
-  };
-  message?: string | null;
-};
 
 export async function authenticate(
   prevState: string | undefined,
@@ -33,27 +31,12 @@ export async function authenticate(
   }
 }
 
-export async function createImg(prevState: string | undefined, formData: FormData) {
-  const schema = z.object({
-    img: z.any(),
-  });
+export type State = {
+  errors?: {
+    imgId?: string;
+    titleId?: string;
+    authorId?: string;
+  };
+  message?: string | null;
+};
 
-  const data = schema.parse({
-    img: formData.get("img"),
-  });
-  const img = data.img
-  const buffer = Buffer.from(await img.arrayBuffer())
-  const filename = Date.now() + img.name.replaceAll(" ", "_");
-  try {
-      await writeFile(
-        path.join(process.cwd(), "uploads/" + filename),
-        buffer
-      );
-      console.log("success  --" + filename);
-  } catch (error) {
-    console.log(error);
-    return {
-      message: 'error'
-    }
-  }
-}

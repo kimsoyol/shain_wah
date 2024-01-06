@@ -5,8 +5,7 @@ const page = () => {
   return (
     <div>page
 
-      <ImageUp />
-
+      <ImageUp />  
     </div>
   )
 }

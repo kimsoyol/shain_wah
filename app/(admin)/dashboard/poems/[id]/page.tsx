@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div>
       Update poem
-      <PoemsForm type="Update" />
+      <PoemsForm  />
     </div>
   );
 };

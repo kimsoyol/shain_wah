@@ -1,5 +1,7 @@
 "use client";
 
+import { writeFile } from "fs/promises";
+
 import { toast } from "sonner";
 import { Textarea } from "../../ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -22,7 +24,7 @@ import { createPoem } from "@/lib/actions/poem.actions";
 
 // { type }: { type: "Create" | "Update" }
 
-const PoemForm = () => {
+constPoemForm = () => {
   const type = "Create";
   const initialValues = poemDefaultValues;
 
@@ -46,7 +48,7 @@ const PoemForm = () => {
 
     toast("A new poem created!");
 
-    console.log(values);
+
   }
 
   return (

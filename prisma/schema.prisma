@@ -44,17 +44,18 @@ model Book {
   authorId    String @db.Uuid
   Poems       BookPoem[]
   Paintings   BookPainting[]
-  publishedOn Int
+  publishedOn DateTime
 }
 
 model Painting {
  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
  title    String?
+ imgURL   String
  author   Author @relation(fields: [authorId], references: [id])
  authorId String @db.Uuid
  Books    BookPainting[]
  Poems    PoemPainting[]
- createdAt Int 
+ createdAt DateTime
 }
 
 
@@ -75,7 +76,7 @@ model Casting {
   body        String
   author      Author @relation(fields: [authorId], references: [id])
   authorId    String @db.Uuid
-  createdAt   Int
+  createdAt   DateTime
 }
 
 model BookPoem {
