@@ -114,7 +114,7 @@ export async function createImg(prevState: State, formData: FormData) {
             id: authorRecord.id,
           },
         },
-        imgURL: `uploads${filename}`,
+        imgURL: `uploads/${filename}`,
         createdAt: new Date('12,1,2002'),
       },
     });

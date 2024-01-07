@@ -24,7 +24,7 @@ import { createPoem } from "@/lib/actions/poem.actions";
 
 // { type }: { type: "Create" | "Update" }
 
-constPoemForm = () => {
+const PoemForm = () => {
   const type = "Create";
   const initialValues = poemDefaultValues;
 
