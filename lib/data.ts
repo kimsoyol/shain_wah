@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
-const moment = require('moment');
+const moment = require("moment");
 
 import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
@@ -46,16 +46,15 @@ export async function fetchFilteredPoems(query: string, currentPage: number) {
       ...poem,
       id: index + 1,
       author: poem.author.name,
-      createdAt: moment(poem.createdAt).format('ll'),
+      createdAt: moment(poem.createdAt).format("ll"),
     }));
 
     console.log("----- fetched fetchFilteredPoems -----");
 
-    
     return transformedPoems;
   } catch (error) {
     console.error("Database Error", error);
-    throw new Error("Failed to fetch invoices.");
+    throw new Error("Failed to fetch poems.");
   }
 }
 

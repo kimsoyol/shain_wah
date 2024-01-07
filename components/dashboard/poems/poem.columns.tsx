@@ -20,7 +20,7 @@ type PoemColum = {
   createdAt: Date
 }
 
-export const columns: ColumnDef<(PoemColum)>[]= [
+export const poemColumns: ColumnDef<(PoemColum)>[]= [
  
   {
     accessorKey: "id",
