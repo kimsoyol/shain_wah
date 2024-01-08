@@ -61,7 +61,7 @@ export async function createPainting(prevState: State, formData: FormData) {
   }
 
   try {
-    await writeFile(path.join(process.cwd(), "uploads/" + filename), buffer);
+    await writeFile(path.join(process.cwd(), "/public/uploads/" + filename), buffer);
     await prisma.painting.create({
       data: {
         title: title,
