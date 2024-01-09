@@ -10,7 +10,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-export type State = {
+type State = {
   errors?: {
     img?: string[];
     title?: string[];
@@ -41,7 +41,7 @@ export async function createPainting(prevState: State, formData: FormData) {
   }
 
   const { img, title, author } = validatedData.data;
-  const time = new Date("12,1,2002");
+
   const buffer = Buffer.from(await img.arrayBuffer());
   const filename = (
     Date.now() +
@@ -75,7 +75,6 @@ export async function createPainting(prevState: State, formData: FormData) {
       },
     });
     console.log("!!!!!   new painting created   !!!!!");
-    return { message: "success" };
     revalidatePath('/dashboard/paintings');
     redirect('/dashboard/paintings');
 

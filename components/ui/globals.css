@@ -5,4 +5,5 @@
 
 body {
   background: url('/bg-noise.png');
+  @apply max-w-[2000px] min-[2000px]:mx-auto w-full px-8 pt-4;
 }

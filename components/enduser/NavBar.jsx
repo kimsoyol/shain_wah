@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between p-4">
-      <Link href='/' className="ml-4">Shain Wah</Link>
+    <nav className="flex justify-between">
+      <Link href='/' className="">Shain Wah</Link>
       <NavBarLinks />
-    </div>
+    </nav>
   )
 }
 export default NavBar

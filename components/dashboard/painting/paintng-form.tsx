@@ -8,7 +8,7 @@ import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
 
 const PaintingFrom = () => {
-  const initialState = { errors: {}, message: '' };
+  const initialState = { message: '', errors: {} };
   const [state, dispatch] = useFormState(createPainting, initialState);
   const { pending } = useFormStatus();
 

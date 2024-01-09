@@ -14,6 +14,26 @@ const transformData = (data: any) => {
   }));
 };
 
+export async function fetchHomePaintings() {
+  try {
+    const paintings = await prisma.painting.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 4,
+      include: {
+        author: true,
+      },
+    })
+
+    const data = transformData(paintings)
+
+    return data
+    
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to fetch paintings for home page.");
+  }
+}
+
 const ITEMS_PER_PAGE = 6;
 export async function fetchPaintingsPages(params: string) {
   noStore();
@@ -25,7 +45,7 @@ export async function fetchPaintingsPages(params: string) {
     return totalPages;
   } catch (error) {
     console.error("Database Error", error);
-    throw new Error("Failed to fetch total number of poems.");
+    throw new Error("Failed to fetch total number of paintings.");
   }
 }
 

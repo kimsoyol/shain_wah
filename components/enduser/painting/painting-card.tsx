@@ -33,19 +33,19 @@ const PaintingCard = ({ painting, index }: Prop) => {
         duration: 0.5,
       }}
       viewport={{ amount: 0 }}
-      className="max-w-sm rounded relative w-full"
+      className="max-w-xs rounded relative"
     >
-      <div className="relative w-full h-[37vh]">
+      <div className="border-solid border-[1.5px] p-2 h-auto rounded-lg w-full">
         <Image
-        
+          width={413}
+          height={413}
           src={`/${painting.imgURL}`}
           alt="img"
-          fill
-          className="rounded-xl"
+          className="aspect-[4/3] h-auto lg:aspect-square bg-cover bg-center w-full rounded-xl"
         />
       </div>
 
-      <h2 className="font-bold text-xl">{painting.title}</h2>
+      <h2 className="font-bold text-xl text-center">{painting.title}</h2>
     </MotionDiv>
   );
 };
