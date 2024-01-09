@@ -40,6 +40,7 @@ model Poem {
 model Book {
   id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title       String
+  imgURL      String
   author      Author @relation(fields: [authorId], references: [id])
   authorId    String @db.Uuid
   Poems       BookPoem[]
@@ -62,6 +63,7 @@ model Painting {
 model Blog {
   id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title     String
+  imgURL    String
   body      String
   author    Author @relation(fields: [authorId], references: [id])
   authorId  String @db.Uuid

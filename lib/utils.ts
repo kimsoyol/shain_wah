@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+const moment = require("moment");
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -41,4 +43,11 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 };
 
 
-// For Image upload
+// format author name and date
+export const transformData = (data: any) => {
+  return data.map((data: any) => ({
+    ...data,
+    author: data.author.name,
+    createdAt: moment(data.createdAt).format("ll"),
+  }));
+};

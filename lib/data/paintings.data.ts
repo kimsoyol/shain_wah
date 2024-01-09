@@ -1,18 +1,13 @@
 
+import {transformData} from '@/lib/utils'
 import { unstable_noStore as noStore } from "next/cache";
 const moment = require("moment");
-import bcrypt from "bcryptjs";
+
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const transformData = (data: any) => {
-  return data.map((data: any) => ({
-    ...data,
-    author: data.author.name,
-    createdAt: moment(data.createdAt).format("ll"),
-  }));
-};
+
 
 export async function fetchHomePaintings() {
   try {

@@ -1,86 +1,65 @@
-"use client"
+"use client";
 
-import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { FormBtn } from "@/components/ui/formBtn";
+import { Input } from "@/components/ui/input";
+import { createPainting } from "@/lib/actions/painting.actions";
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { bookDefaultValues } from "@/constants";
-import { bookFormSchema } from "@/lib/valitators";
+import { useFormState } from "react-dom";
+import { useFormStatus } from "react-dom";
 
-
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
-
-export function BookForm() {
-  const type = 'Create'
-  const initialValues = bookDefaultValues;
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof bookFormSchema>>({
-    resolver: zodResolver(bookFormSchema),
-    defaultValues: initialValues
-  })
- 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof bookFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    toast('Book created!')
-    console.log(values)
-  }
-  // ...
+const BookForm = () => {
+  const initialState = { message: '', errors: {} };
+  const [state, dispatch] = useFormState(createPainting, initialState);
+  const { pending } = useFormStatus();
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
+    <div>
+      ImageUp
+      <form action={dispatch}>
+        <Input
+          id="title"
           name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input placeholder="Book Title" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          type="text"
+          aria-describedby="title-error"
+          placeholder="title"
+          className="mt-5"
         />
-        <FormField
-          control={form.control}
-          name="imageUrl"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Book Image</FormLabel>
-              <FormControl>
-                <Input placeholder="Book Image" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+        <Input
+          id="author"
+          name="author"
+          type="text"
+          aria-describedby="img-error"
+          placeholder="author"
+          required
+          className="mt-5"
         />
-        <Button type="submit">Submit</Button>
+        <div>
+          {state.errors?.author && (
+            <p className="mt-2 text-sm text-red-500">{state.errors.author}</p>
+          )}
+        </div>
+        <Input
+          id="img"
+          name="img"
+          type="file"
+          aria-describedby="img-error"
+          className="mt-5"
+          required
+        />
+
+        <FormBtn type="submit" className="mt-5" aria-disabled={pending}>
+          Create Book
+        </FormBtn>
       </form>
-    </Form>
-  )
-}
+    </div>
+  );
+};
+export default BookForm;
+
+// {state.errors?img &&
+//   state.errors.img.map(error:string) => (
+//     <p key={error}>
+//       {error}
+//     </p>
+//   )
+// }

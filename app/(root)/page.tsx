@@ -5,14 +5,21 @@ import Image from "next/image";
 import PaintingCard, {
   PaintingProp,
 } from "@/components/enduser/painting/painting-card";
+import { fetchHomePomes } from "@/lib/data/poems.data";
+import PoemCard, { PoemProp } from "@/components/enduser/poem/poemCard";
 
 const page = async () => {
+  const poems = await fetchHomePomes();
   const paintings = await fetchHomePaintings();
 
   return (
     <main className="">
         <section className="flex gap-5 flex-wrap justify-center mt-5 lg:mt-10">
-        <p>Recent Poems...</p>
+        {poems && 
+          poems.map((poem: PoemProp, index:number) => (
+            <PoemCard key={poem.id} poem={poem} index={index} />
+          ))
+        }
         <div></div>
       </section>
       <Suspense fallback={<Loading />}>

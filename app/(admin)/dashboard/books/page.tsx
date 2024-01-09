@@ -2,7 +2,8 @@
 
 const page = () => {
   return (
-    <div>books</div>
+    <div>books
+    </div>
   )
 }
 export default page
